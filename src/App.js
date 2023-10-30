@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import "./App.css";
 import { Movies } from "./components/Peliculas.jsx";
 import { searchMovies } from "./service.js";
+import { CarouselDefault } from "./components/CarouselDefault";
+import { StickyNavbar } from "./components/StickyNavbar";
 const useSearch = () => {
   const [search, setSearch] = useState("");
   const [error, setError] = useState(null);
@@ -37,8 +39,12 @@ const App = () => {
   };
 
   return (
-    <div className="page">
+    <div className="">
       <header>
+        <StickyNavbar></StickyNavbar>
+      </header>
+      <main className="container mx-auto mt-8">
+        <CarouselDefault />
         <form onSubmit={handleSubmit}>
           <input
             name="title"
@@ -51,9 +57,9 @@ const App = () => {
           <button>Buscar</button>
         </form>
         {error && <p style={{ color: "red" }}>{error}</p>}
-      </header>
-      <main>
-        <Movies movies={movies} />
+        <div className="page ">
+          <Movies movies={movies} />
+        </div>
       </main>
     </div>
   );
