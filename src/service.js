@@ -3,6 +3,7 @@ export const searchMovies = ({ search }) => {
   try {
     const res = DataMovies.Search;
     // const data = res.filter((el) => search === el.Year);
+    console.log(search);
     console.log(res);
     return res;
   } catch {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 //Prueba redireccion
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 //import { Routes, Route } from "react-router-dom";
 //
 import {
@@ -12,7 +12,7 @@ import {
 } from "@material-tailwind/react";
 import { Search } from "./Search.jsx";
 
-export function StickyNavbar() {
+export function StickyNavbar({ getMovies }) {
   const [openNav, setOpenNav] = React.useState(false);
   const [logged, setLogged] = useState(false);
 
@@ -20,8 +20,8 @@ export function StickyNavbar() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/")
-  }
+    navigate("/");
+  };
   //
 
   React.useEffect(() => {
@@ -69,25 +69,26 @@ export function StickyNavbar() {
             Material Tailwind
           </Typography>
           {/*  Buscador input compu */}
-          <Search style={"hidden items-center gap-x-2 lg:flex"} />
+          <Search
+            style={"hidden items-center gap-x-2 lg:flex"}
+            getMovies={getMovies}
+          />
 
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
 
             <div className="flex items-center gap-x-1">
               {logged ? (
-                <Button
-                onClick={handleClick}
-                >
-                  Iniciar sesión
-                </Button>
+                <Button onClick={handleClick}>Iniciar sesión</Button>
               ) : (
-             <Button
-             variant="text"
-             size="sm"
-             className="hidden lg:inline-block" onClick={handleClick}>
-              Cerrar sesion
-              </Button>
+                <Button
+                  variant="text"
+                  size="sm"
+                  className="hidden lg:inline-block"
+                  onClick={handleClick}
+                >
+                  Cerrar sesion
+                </Button>
               )}
               {/* <Button
                 variant="text"
@@ -145,7 +146,10 @@ export function StickyNavbar() {
         </div>
         <Collapse open={openNav}>
           {/* Buscador input movile */}
-          <Search style={"flex flex-col gap-x-2 sm:flex-row sm:items-center"} />
+          <Search
+            style={"flex flex-col gap-x-2 sm:flex-row sm:items-center"}
+            getMovies={getMovies}
+          />
 
           {/* Buscador input movile */}
           {navList}

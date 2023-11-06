@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Input } from "@material-tailwind/react";
+import { useSearch } from "../hooks/useSearch";
+import { useMovies } from "../hooks/useMovies";
+export function Search({ style, getMovies }) {
+  const { search, setSearch, error } = useSearch();
+  // const [movies, setMovies] = useState([]);
+  // const { movies, getMovies, loading } = useMovies({ search });
 
-export function Search({ style }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getMovies(search);
+  };
+  const handleOnchange = (e) => {
+    setSearch(e.target.value);
+  };
   return (
     <div className={style}>
       <div className="relative flex w-full gap-2 md:w-max">
         <Input
+          name="title"
           type="search"
           placeholder="Search"
+          onChange={handleOnchange}
           containerProps={{
             className: "min-w-[288px]",
           }}
@@ -17,9 +31,10 @@ export function Search({ style }) {
           }}
         />
       </div>
-      <Button size="md" className="rounded-lg ">
+      <Button size="md" className="rounded-lg " onClick={handleSubmit}>
         Search
       </Button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 }
