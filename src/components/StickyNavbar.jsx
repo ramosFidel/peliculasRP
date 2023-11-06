@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+//Prueba redireccion
+import { useNavigate } from 'react-router-dom';
+//import { Routes, Route } from "react-router-dom";
+//
 import {
   Navbar,
   Typography,
@@ -11,6 +15,14 @@ import { Search } from "./Search.jsx";
 export function StickyNavbar() {
   const [openNav, setOpenNav] = React.useState(false);
   const [logged, setLogged] = useState(false);
+
+  //Prieba
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/")
+  }
+  //
 
   React.useEffect(() => {
     window.addEventListener(
@@ -65,14 +77,17 @@ export function StickyNavbar() {
             <div className="flex items-center gap-x-1">
               {logged ? (
                 <Button
-                  variant="text"
-                  size="sm"
-                  className="hidden lg:inline-block"
+                onClick={handleClick}
                 >
-                  <span>Logeed</span>
+                  Iniciar sesión
                 </Button>
               ) : (
-                "Falta"
+             <Button
+             variant="text"
+             size="sm"
+             className="hidden lg:inline-block" onClick={handleClick}>
+              Cerrar sesion
+              </Button>
               )}
               {/* <Button
                 variant="text"
