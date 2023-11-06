@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { registroAuth } from "../service";
 
 function Registro() {
   const [formData, setFormData] = useState({
@@ -13,16 +14,13 @@ function Registro() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   const navigate = useNavigate();
 
-  const redireccionLogin = () => {
+  const redireccionLogin = (e) => {
+    e.preventDefault();
+    registroAuth(formData);
     navigate("/");
   };
-
   return (
     <div className="w-1/2 mx-auto mt-10 p-4 border rounded-lg">
       <div className="mb-4">
