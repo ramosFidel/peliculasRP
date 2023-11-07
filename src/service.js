@@ -25,3 +25,9 @@ export const registroAuth = (formData) => {
   user.push(formData);
   // console.log(user);
 };
+
+// Peliculas recomendadas de la pantalla principal
+export const mainMovies = () => {
+  const movies = Data.Search.slice(1, 5);
+  return movies;
+};

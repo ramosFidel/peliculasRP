@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { searchMovies } from "../service";
 import { useRef, useMemo, useCallback } from "react";
-export function useMovies({ search, sort }) {
+export function useMovies({ search, sort, setIsSearching }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -15,6 +15,7 @@ export function useMovies({ search, sort }) {
     try {
       setLoading(true);
       setError(null);
+      setIsSearching(true);
       previusSearch.current = search;
       const newmovies = searchMovies({ search });
       setMovies(newmovies);

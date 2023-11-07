@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 //Prueba redireccion
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 //import { Routes, Route } from "react-router-dom";
 //
 import {
@@ -12,7 +12,7 @@ import {
 } from "@material-tailwind/react";
 import { Search } from "./Search.jsx";
 
-export function StickyNavbar({ getMovies }) {
+export function StickyNavbar({ getMovies, setIsSearching }) {
   const [openNav, setOpenNav] = React.useState(false);
   const [logged, setLogged] = useState(false);
 
@@ -39,8 +39,15 @@ export function StickyNavbar({ getMovies }) {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="/" className="flex items-center">
-          Pages
+        <a
+          href="#"
+          className="flex items-center"
+          onClick={(e) => {
+            e.preventDefault();
+            setIsSearching(false);
+          }}
+        >
+          Recomendaciones
         </a>
       </Typography>
       <Typography
@@ -49,7 +56,7 @@ export function StickyNavbar({ getMovies }) {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="/" className="flex items-center">
+        <a href="#" className="flex items-center">
           Account
         </a>
       </Typography>
