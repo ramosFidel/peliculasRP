@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginAuth } from "../service";
 
-function Login() {
+function Login({ onLogin }) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -20,6 +20,7 @@ function Login() {
     const usuarioEncontrado = loginAuth(formData);
 
     if (usuarioEncontrado) {
+      onLogin(usuarioEncontrado);
       navigate("/catalogo");
     } else {
       setError("Credenciales incorrectas");

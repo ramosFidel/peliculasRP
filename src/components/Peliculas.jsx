@@ -7,7 +7,7 @@ import { CarouselDefault } from "./CarouselDefault";
 import { StickyNavbar } from "./StickyNavbar";
 import { useSearch } from "../hooks/useSearch";
 import { useMovies } from "../hooks/useMovies";
-const App = () => {
+const App = ({ currentUser, onLogout }) => {
   const [isSearching, setIsSearching] = useState(false);
   const { search } = useSearch();
   const { movies, getMovies, loading } = useMovies({
@@ -22,6 +22,8 @@ const App = () => {
         <StickyNavbar
           getMovies={getMovies}
           setIsSearching={setIsSearching}
+          currentUser={currentUser}
+          onLogout={onLogout}
         ></StickyNavbar>
       </header>
       <main className="container mx-auto mt-8">

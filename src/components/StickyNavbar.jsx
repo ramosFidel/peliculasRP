@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-//Prueba redireccion
 import { Link, useNavigate } from "react-router-dom";
-//import { Routes, Route } from "react-router-dom";
-//
+
 import {
   Navbar,
   Typography,
@@ -12,15 +10,24 @@ import {
 } from "@material-tailwind/react";
 import { Search } from "./Search.jsx";
 
-export function StickyNavbar({ getMovies, setIsSearching }) {
-  const [openNav, setOpenNav] = React.useState(false);
-  const [logged, setLogged] = useState(false);
-
-  //Prieba
+export function StickyNavbar({
+  getMovies,
+  setIsSearching,
+  currentUser,
+  onLogout,
+}) {
+  const [openNav, setOpenNav] = useState(false);
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleLogout = () => {
+    onLogout(null);
     navigate("/");
+  };
+  const handleLogin = () => {
+    navigate("/");
+  };
+  const handleSingin = () => {
+    navigate("registro");
   };
   //
 
@@ -85,32 +92,34 @@ export function StickyNavbar({ getMovies, setIsSearching }) {
             <div className="mr-4 hidden lg:block">{navList}</div>
 
             <div className="flex items-center gap-x-1">
-              {logged ? (
-                <Button onClick={handleClick}>Iniciar sesión</Button>
-              ) : (
+              {currentUser ? (
                 <Button
                   variant="text"
                   size="sm"
                   className="hidden lg:inline-block"
-                  onClick={handleClick}
+                  onClick={handleLogout}
                 >
                   Cerrar sesion
                 </Button>
+              ) : (
+                <>
+                  <Button
+                    variant="text"
+                    onClick={handleLogin}
+                    className="hidden lg:inline-block"
+                    size="sm"
+                  >
+                    Iniciar sesión
+                  </Button>
+                  <Button
+                    onClick={handleSingin}
+                    className="hidden lg:inline-block"
+                    size="sm"
+                  >
+                    Registrate
+                  </Button>
+                </>
               )}
-              {/* <Button
-                variant="text"
-                size="sm"
-                className="hidden lg:inline-block"
-              >
-                <span>Log In</span>
-              </Button>
-              <Button
-                variant="gradient"
-                size="sm"
-                className="hidden lg:inline-block"
-              >
-                <span>Sign in</span>
-              </Button> */}
             </div>
             <IconButton
               variant="text"
@@ -162,12 +171,38 @@ export function StickyNavbar({ getMovies, setIsSearching }) {
           {navList}
 
           <div className="flex items-center gap-x-1">
-            <Button fullWidth variant="text" size="sm" className="">
-              <span>Log In</span>
-            </Button>
-            <Button fullWidth variant="gradient" size="sm" className="">
-              <span>Sign in</span>
-            </Button>
+            {currentUser ? (
+              <Button
+                fullWidth
+                variant="text"
+                size="sm"
+                className=""
+                onClick={handleLogout}
+              >
+                Cerrar sesion
+              </Button>
+            ) : (
+              <>
+                <Button
+                  fullWidth
+                  variant="text"
+                  size="sm"
+                  onClick={handleLogin}
+                  className=""
+                >
+                  Iniciar sesión
+                </Button>
+                <Button
+                  onClick={handleSingin}
+                  fullWidth
+                  variant="gradient"
+                  size="sm"
+                  className=""
+                >
+                  Registrate
+                </Button>
+              </>
+            )}
           </div>
         </Collapse>
       </Navbar>
