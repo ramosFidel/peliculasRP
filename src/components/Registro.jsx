@@ -19,7 +19,7 @@ function Registro() {
   const redireccionLogin = (e) => {
     e.preventDefault();
     registroAuth(formData);
-    navigate("/");
+    navigate("/login");
   };
   return (
     <div className="w-1/2 mx-auto mt-10 p-4 border rounded-lg">

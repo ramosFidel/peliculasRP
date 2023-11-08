@@ -21,7 +21,7 @@ function Login({ onLogin }) {
 
     if (usuarioEncontrado) {
       onLogin(usuarioEncontrado);
-      navigate("/catalogo");
+      navigate("/");
     } else {
       setError("Credenciales incorrectas");
     }

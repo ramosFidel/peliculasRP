@@ -21,10 +21,10 @@ export function StickyNavbar({
 
   const handleLogout = () => {
     onLogout(null);
-    navigate("/");
+    navigate("/login");
   };
   const handleLogin = () => {
-    navigate("/");
+    navigate("/login");
   };
   const handleSingin = () => {
     navigate("registro");
@@ -46,16 +46,9 @@ export function StickyNavbar({
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a
-          href="#"
-          className="flex items-center"
-          onClick={(e) => {
-            e.preventDefault();
-            setIsSearching(false);
-          }}
-        >
-          Recomendaciones
-        </a>
+        <Link to="/" className="flex items-center">
+          Vacio
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -63,9 +56,9 @@ export function StickyNavbar({
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Account
-        </a>
+        <Link to="/perfil" className="flex items-center">
+          Cuenta
+        </Link>
       </Typography>
     </ul>
   );
@@ -74,14 +67,13 @@ export function StickyNavbar({
     <div className="">
       <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-12 lg:py-4">
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Typography
+          <Link
             as="a"
-            href="#"
-            variant="h6"
-            className="mr-4 ml-2 cursor-pointer py-1.5"
+            to="/"
+            className="mr-4 ml-2 cursor-pointer py-1.5 font-bold"
           >
-            Material Tailwind
-          </Typography>
+            Grupo DINAMITA
+          </Link>
           {/*  Buscador input compu */}
           <Search
             style={"hidden items-center gap-x-2 lg:flex"}
