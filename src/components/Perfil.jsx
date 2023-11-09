@@ -1,43 +1,29 @@
 import React, { useState } from "react";
-import { Button } from "@material-tailwind/react";
+import { Button, Input } from "@material-tailwind/react";
 
 function EditarPerfil() {
   const handleActualiza = () => {};
   return (
     <div className="bg-white shadow rounded-lg p-6">
       <h2 className="text-2xl font-bold mb-4 text-center">Editar el perfil</h2>
-      <form className="max-w-md mx-auto flex flex-col">
-        <label className="block text-gray-700 text-sm font-bold mb-2">
-          Nombre
-        </label>
-        <input
-          type="text"
-          id="nombre"
-          name="nombre"
-          className="appearance-none border rounded mb-4 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value="Nombre del Usuario"
-        ></input>
-
-        <label className="block text-gray-700 text-sm font-bold mb-2">
-          Correo Electrónico
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          className="appearance-none border rounded mb-4 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value="usuario@example.com"
-        ></input>
-
-        <Button
-          fullWidth
-          variant="gradient"
-          size="sm"
-          className=""
-          onClick={handleActualiza}
-        >
-          Guardar Cambios
-        </Button>
+      <form className="max-w-md mx-auto flex flex-col gap-5">
+        <div className="mb-4">
+          <Input label="Usuario" />
+        </div>
+        <div className="mb-4">
+          <Input type="email" label="Email Address" />
+        </div>
+        <div className="mb-4">
+          <Button
+            fullWidth
+            variant="gradient"
+            size="sm"
+            className=""
+            onClick={handleActualiza}
+          >
+            Guardar Cambios
+          </Button>
+        </div>
       </form>
     </div>
   );
@@ -49,38 +35,16 @@ function CambioContrasena() {
       <h2 className="text-2xl font-bold mb-4 text-center">
         Cambio de contraseña
       </h2>
-      <form className="max-w-md mx-auto flex flex-col">
-        <label className="block text-gray-700 text-sm font-bold mb-2">
-          Antigua contraseña
-        </label>
-        <input
-          type="text"
-          id="nombre"
-          name="nombre"
-          className="appearance-none border rounded mb-4 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value="Nombre del Usuario"
-        ></input>
-
-        <label className="block text-gray-700 text-sm font-bold mb-2">
-          Nueva contraseña
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          className="appearance-none border rounded mb-4 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value="usuario@example.com"
-        ></input>
-        <label className="block text-gray-700 text-sm font-bold mb-2">
-          Confirmar nueva contraseña
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          className="appearance-none border rounded mb-4 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value="usuario@example.com"
-        ></input>
+      <form className="max-w-md mx-auto flex flex-col gap-3">
+        <div className="mb-4">
+          <Input label="Antigua contraseña" type="password" />
+        </div>
+        <div className="mb-4">
+          <Input label="Nueva contraseña" type="password" />
+        </div>
+        <div className="mb-4">
+          <Input label="Confirmar nueva contraseña" type="password" />
+        </div>
 
         <Button
           fullWidth
