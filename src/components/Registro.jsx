@@ -20,7 +20,7 @@ function Registro() {
   const redireccionLogin = (e) => {
     e.preventDefault();
     registroAuth(formData);
-    console.log(formData);
+    // console.log(formData);
     navigate("/login");
   };
   return (
@@ -59,7 +59,7 @@ function Registro() {
         <Button
           fullWidth
           variant="gradient"
-          size="sm"
+          size="md"
           className=""
           onClick={redireccionLogin}
         >
