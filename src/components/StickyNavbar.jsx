@@ -50,16 +50,18 @@ export function StickyNavbar({
           Vacio
         </Link>
       </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <Link to="/perfil" className="flex items-center">
-          Cuenta
-        </Link>
-      </Typography>
+      {currentUser && (
+        <Typography
+          as="li"
+          variant="small"
+          color="blue-gray"
+          className="p-1 font-normal"
+        >
+          <Link to="/perfil" className="flex items-center">
+            Cuenta
+          </Link>
+        </Typography>
+      )}
     </ul>
   );
 
@@ -74,7 +76,6 @@ export function StickyNavbar({
           >
             Grupo DINAMITA
           </Link>
-          {/*  Buscador input compu */}
           <Search
             style={"hidden items-center gap-x-2 lg:flex"}
             getMovies={getMovies}
@@ -153,13 +154,11 @@ export function StickyNavbar({
           </div>
         </div>
         <Collapse open={openNav}>
-          {/* Buscador input movile */}
           <Search
             style={"flex flex-col gap-x-2 sm:flex-row sm:items-center"}
             getMovies={getMovies}
           />
 
-          {/* Buscador input movile */}
           {navList}
 
           <div className="flex items-center gap-x-1">
