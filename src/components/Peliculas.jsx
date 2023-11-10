@@ -7,9 +7,10 @@ import { CarouselDefault } from "./CarouselDefault";
 const App = ({ movies, isSearching }) => {
   return (
     <>
-      <main className="container mx-auto mt-8">
-        <CarouselDefault />
-        <div className="page ">
+      <main className="container mx-auto mt-8 bg-white rounded-xl">
+        {isSearching || <CarouselDefault />}
+
+        <div className="page pt-5">
           {isSearching ? <Movies movies={movies} /> : <MainPeliculas />}
         </div>
       </main>

@@ -28,7 +28,7 @@ function App() {
     setCurrentUser(null);
   };
   return (
-    <div className="App">
+    <div className="App ">
       {showNavbar && (
         <header>
           <StickyNavbar

@@ -137,7 +137,7 @@ export const Perfil = ({ currentUser }) => {
   return (
     <>
       {true ? (
-        <div className="bg-gray-100">
+        <div className="bg-gray-100 min-h-screen flex items-center justify-center">
           <div className="container mx-auto py-8">
             <div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
               <div className="col-span-4 sm:col-span-3">
@@ -170,6 +170,14 @@ export const Perfil = ({ currentUser }) => {
                       >
                         Cambiar contraseña
                       </li>
+                      <Button
+                        fullWidth
+                        variant="gradient"
+                        size="sm"
+                        className=""
+                      >
+                        Cerrar sesión
+                      </Button>
                     </ul>
                   </div>
                 </div>
