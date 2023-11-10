@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registroAuth } from "../service";
-import { Button, Input } from "@material-tailwind/react";
+import { Button, Input, Typography } from "@material-tailwind/react";
 
 function Registro() {
   const [formData, setFormData] = useState({
@@ -28,7 +28,6 @@ function Registro() {
       <div className="mb-4">
         <h2 className="text-2xl text-center">Bienvenido, Registrate Ahora</h2>
       </div>
-
       <div className="mb-4">
         <Input
           label="Nombre de usuario"
@@ -54,7 +53,6 @@ function Registro() {
           onChange={handleChange}
         />
       </div>
-
       <div className="mb-4">
         <Button
           fullWidth
@@ -65,6 +63,15 @@ function Registro() {
         >
           Registrarse
         </Button>
+      </div>
+      <div className="flex justify-center">
+        ¿Ya tienes una cuenta?
+        <Link
+          to="/login"
+          className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500 underline"
+        >
+          Login aquí
+        </Link>
       </div>
     </div>
   );

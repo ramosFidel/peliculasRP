@@ -36,7 +36,7 @@ function Login({ onLogin }) {
   return (
     <div className="flex h-screen justify-center items-center">
       <div className="text-center mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
-        <h2 className="text-2xl mb-4">Bienvenido</h2>
+        <h2 className="text-2xl mb-4">Login</h2>
         <div className="mb-4">
           <Input
             label="Usuario"
