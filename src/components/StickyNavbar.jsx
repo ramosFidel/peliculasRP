@@ -12,9 +12,12 @@ import { Search } from "./Search.jsx";
 
 export function StickyNavbar({
   getMovies,
-  setIsSearching,
+  isinCuenta,
   currentUser,
   onLogout,
+  setIsInCuenta,
+  setIsSearching,
+  setSearch,
 }) {
   const [openNav, setOpenNav] = useState(false);
   const navigate = useNavigate();
@@ -29,7 +32,10 @@ export function StickyNavbar({
   const handleSingin = () => {
     navigate("registro");
   };
-  //
+  const handleMainPeliculas = () => {
+    setIsInCuenta(false);
+    setIsSearching(false);
+  };
 
   React.useEffect(() => {
     window.addEventListener(
@@ -46,8 +52,12 @@ export function StickyNavbar({
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to="/" className="flex items-center">
-          Vacio
+        <Link
+          to="/"
+          className="flex items-center"
+          onClick={() => setIsInCuenta(false)}
+        >
+          Peliculas
         </Link>
       </Typography>
       {currentUser && (
@@ -57,7 +67,11 @@ export function StickyNavbar({
           color="blue-gray"
           className="p-1 font-normal"
         >
-          <Link to="/perfil" className="flex items-center">
+          <Link
+            to="/perfil"
+            className="flex items-center"
+            onClick={() => setIsInCuenta(true)}
+          >
             Cuenta
           </Link>
         </Typography>
@@ -73,13 +87,18 @@ export function StickyNavbar({
             as="a"
             to="/"
             className="mr-4 ml-2 cursor-pointer py-1.5 font-bold"
+            onClick={handleMainPeliculas}
           >
             Grupo DINAMITA
           </Link>
-          <Search
-            style={"hidden items-center gap-x-2 lg:flex"}
-            getMovies={getMovies}
-          />
+
+          {isinCuenta || (
+            <Search
+              style={"hidden items-center gap-x-2 lg:flex"}
+              // style={`${isinCuenta ? "hidden" : ""} items-center flex gap-x-2 `}
+              getMovies={getMovies}
+            />
+          )}
 
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>

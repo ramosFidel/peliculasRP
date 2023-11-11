@@ -20,7 +20,7 @@ export const MainPeliculas = () => {
       <ul className="movies">
         {mainData.map((movie) => (
           <li
-            className="movie rounded-lg shadow-lg"
+            className="movie rounded-lg shadow-lg cursor-pointer"
             key={movie.ID}
             onClick={() => handleOpen(movie)}
           >

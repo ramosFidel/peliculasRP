@@ -11,7 +11,9 @@ import { useMovies } from "./hooks/useMovies";
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isSearching, setIsSearching] = useState(false);
-  const { search } = useSearch();
+  const [isinCuenta, setIsInCuenta] = useState(false);
+
+  const { search, setSearch } = useSearch();
   const { movies, getMovies, loading } = useMovies({
     search,
     setIsSearching,
@@ -32,8 +34,11 @@ function App() {
       {showNavbar && (
         <header>
           <StickyNavbar
-            getMovies={getMovies}
             setIsSearching={setIsSearching}
+            setSearch={setSearch}
+            isinCuenta={isinCuenta}
+            getMovies={getMovies}
+            setIsInCuenta={setIsInCuenta}
             currentUser={currentUser}
             onLogout={handleLogout}
           ></StickyNavbar>

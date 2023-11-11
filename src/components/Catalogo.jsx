@@ -16,7 +16,7 @@ function ListMovies({ movies }) {
       <ul className="movies">
         {movies.map((movie) => (
           <li
-            className="movie rounded-lg shadow-lg"
+            className="movie rounded-lg shadow-lg cursor-pointer"
             key={movie.ID}
             onClick={() => handleOpen(movie)}
           >
