@@ -28,28 +28,32 @@
       "Year": "2012",
       "ID": 1,
       "Type": "movie",
-      "Poster": "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"
+      "Poster": "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+      "Description": "Es una película estadounidense perteneciente al género de cine épico, ciencia ficción y aventura dirigida, producida y coescrita por James Cameron. "
     },
     {
       "Title": "Avengers: Endgame",
       "Year": "2019",
       "ID": 2,
       "Type": "movie",
-      "Poster": "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg"
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg",
+      "Description": "Los Vengadores fueron un equipo compuesto por personas extraordinarias, individuos alterados u otras características especiales, que se encargaba de proteger la Tierra de las amenazas internacionales o alienígenas. "
     },
     {
       "Title": "Avengers: Infinity War",
       "Year": "2018",
       "ID": 3,
       "Type": "movie",
-      "Poster": "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg"
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg",
+      "Description": "Marvel's The Avengers​ (titulada The Avengers: Los Vengadores en Hispanoamérica y Los Vengadores en España), o simplemente The Avengers"
     },
     {
       "Title": "Avengers: Age of Ultron",
       "Year": "2015",
       "ID": 4,
       "Type": "movie",
-      "Poster": "https://m.media-amazon.com/images/M/MV5BMTM4OGJmNWMtOTM4Ni00NTE3LTg3MDItZmQxYjc4N2JhNmUxXkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_SX300.jpg"
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTM4OGJmNWMtOTM4Ni00NTE3LTg3MDItZmQxYjc4N2JhNmUxXkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_SX300.jpg",
+      "Description": "Tony Stark (Iron Man) es un genio y multimillonario que usa sus habilidades e inteligencia para desarrollar armas de alta tecnología."
     },
     {
       "Title": "The Avengers",
