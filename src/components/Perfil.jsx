@@ -1,8 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { updateUserAuth } from "../service.js";
 import { Button, Input } from "@material-tailwind/react";
 
-function EditarPerfil({ currentUser }) {
-  const handleActualiza = () => {};
+function EditarPerfil({ currentUser, setCurrentUser }) {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  const handleActualiza = (e) => {
+    e.preventDefault();
+    let idCurrentUser = currentUser.id;
+    // console.log(currentUser.id);
+
+    //Funcion que actualiza el user
+    const updateUser = updateUserAuth(formData, idCurrentUser);
+
+    setCurrentUser({ ...currentUser, ...formData });
+    // console.log(formData);
+  };
   return (
     <div className="bg-white shadow rounded-lg p-6">
       <h2 className="text-2xl font-bold mb-4 text-center">Editar el perfil</h2>
@@ -10,22 +29,28 @@ function EditarPerfil({ currentUser }) {
         <div className="mb-4">
           <label>Usuario</label>
           <Input
+            name="username"
             placeholder={currentUser && currentUser.username}
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
               className: "hidden",
             }}
+            value={formData.username}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-4">
           <label>Email Address</label>
           <Input
+            name="email"
             type="email"
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
             placeholder={currentUser && currentUser.email}
             labelProps={{
               className: "hidden",
             }}
+            value={formData.email}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-4">
@@ -43,25 +68,32 @@ function EditarPerfil({ currentUser }) {
     </div>
   );
 }
-function CambioContrasena({ currentUser }) {
+function CambioContrasena({ currentUser, setCurrentUser }) {
   const [formData, setFormData] = useState({
     contra: "",
     contraConf: "",
   });
-  const [contra, setContra] = useState(false);
+  const [contra, setContra] = useState(true);
+  const [contraConf, setContraconf] = useState(true);
 
   const handleContra = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (formData.contra === formData.contraConf) {
+      setContraconf(true);
+    } else {
+      setContraconf(false);
+    }
   };
-  const GuardaContra = () => {
-    setContra(false);
-  };
+  //Falta funcionalidad
+  const GuardaContra = () => {};
   const oldContra = (e) => {
-    console.log(e.target.value);
+    if (currentUser.password === e.target.value) {
+      setContra(false);
+    } else {
+      setContra(true);
+    }
   };
-  useEffect(() => {
-    setContra(formData.contra !== formData.contraConf);
-  }, [formData]);
+
   return (
     <div className="bg-white shadow rounded-lg p-6">
       <h2 className="text-2xl font-bold mb-4 text-center">
@@ -90,6 +122,7 @@ function CambioContrasena({ currentUser }) {
             labelProps={{
               className: "hidden",
             }}
+            disabled={contra}
             value={formData.contra}
             onChange={handleContra}
           />
@@ -99,13 +132,13 @@ function CambioContrasena({ currentUser }) {
           <Input
             type="password"
             name="contraConf"
+            disabled={contra}
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
               className: "hidden",
             }}
             value={formData.contraConf}
             onChange={handleContra}
-            error={contra}
           />
         </div>
 
@@ -115,7 +148,7 @@ function CambioContrasena({ currentUser }) {
           size="sm"
           className=""
           onClick={GuardaContra}
-          disabled={contra}
+          disabled={contra || contraConf}
         >
           Cambiar contraseña
         </Button>
@@ -126,7 +159,7 @@ function CambioContrasena({ currentUser }) {
 function Nocuenta() {
   return <>No tiene cuenta</>;
 }
-export const Perfil = ({ currentUser }) => {
+export const Perfil = ({ currentUser, setCurrentUser }) => {
   const [componenteActivo, setComponenteActivo] = useState("EditarPerfil");
   const editarClick = () => {
     setComponenteActivo("EditarPerfil");
@@ -134,9 +167,10 @@ export const Perfil = ({ currentUser }) => {
   const cambiarClick = () => {
     setComponenteActivo("CambiarContrasena");
   };
+  console.log(currentUser);
   return (
     <>
-      {currentUser ? (
+      {true ? (
         <div className="bg-gray-100 min-h-screen flex items-center justify-center">
           <div className="container mx-auto py-8">
             <div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
@@ -172,6 +206,14 @@ export const Perfil = ({ currentUser }) => {
                       </li>
                       <Button
                         fullWidth
+                        variant="text"
+                        size="sm"
+                        className="mb-2"
+                      >
+                        Eliminar cuenta
+                      </Button>
+                      <Button
+                        fullWidth
                         variant="gradient"
                         size="sm"
                         className=""
@@ -184,9 +226,15 @@ export const Perfil = ({ currentUser }) => {
               </div>
               <div className="col-span-4 sm:col-span-9 ">
                 {componenteActivo === "EditarPerfil" ? (
-                  <EditarPerfil currentUser={currentUser} />
+                  <EditarPerfil
+                    currentUser={currentUser}
+                    setCurrentUser={setCurrentUser}
+                  />
                 ) : (
-                  <CambioContrasena currentUser={currentUser} />
+                  <CambioContrasena
+                    currentUser={currentUser}
+                    setCurrentUser={setCurrentUser}
+                  />
                 )}
               </div>
             </div>

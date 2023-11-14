@@ -63,7 +63,13 @@ function App() {
         <Route path="/registro" element={<Registro />} />
         <Route
           path="/perfil"
-          element={<Perfil currentUser={currentUser} onLogout={handleLogout} />}
+          element={
+            <Perfil
+              currentUser={currentUser}
+              onLogout={handleLogout}
+              setCurrentUser={setCurrentUser}
+            />
+          }
         />
       </Routes>
     </div>
