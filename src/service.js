@@ -11,20 +11,42 @@ export const searchMovies = ({ search }) => {
   }
 };
 //Debe retornar el usuario logeado
-export const loginAuth = (formData) => {
-  const user = Data.usuarios;
-  const usuarioEncontrado = user.find(
-    (el) =>
-      el.username === formData.username && el.password === formData.password
-  );
-
-  return usuarioEncontrado;
+export const loginAuth = async (formData) => {
+  try {
+    const res = await fetch("http://localhost:3001/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...formData,
+      }),
+    });
+    const data = await res.json();
+    const user = data;
+    return user;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
-export const registroAuth = (formData) => {
-  const user = Data.usuarios;
-  user.push(formData);
-  // console.log(user);
+export const registroAuth = async (formData) => {
+  try {
+    const res = await fetch("http://localhost:3001/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...formData,
+      }),
+    });
+    const data = await res.json();
+    const user = data;
+    return user;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 // Peliculas recomendadas de la pantalla principal
@@ -33,13 +55,60 @@ export const mainMovies = () => {
   return movies;
 };
 
-//falta backend
-export const updateUserAuth = (formData, idCurrentUser) => {
-  const user = Data.usuarios;
-
-  let updateUser = user.map((el) => (el.id === idCurrentUser ? formData : el));
-  return updateUser;
+export const updateUserAuth = async (formData, idCurrentUser) => {
+  try {
+    const res = await fetch("http://localhost:3001/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: idCurrentUser,
+        ...formData,
+      }),
+    });
+    const data = await res.json();
+    const user = data;
+    return user;
+  } catch (e) {
+    console.log(e);
+  }
 };
-export const updateUserPassAuth = () => {};
+export const updateUserPassAuth = async (contra, idCurrentUser) => {
+  try {
+    const res = await fetch("http://localhost:3001/updatePass", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: idCurrentUser,
+        password: contra,
+      }),
+    });
+    const data = await res.json();
+    const user = data;
+    return user;
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-export const deleteUserAuth = () => {};
+export const deleteUserAuth = async (idUser) => {
+  try {
+    const res = await fetch("http://localhost:3001/delete", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: idUser,
+      }),
+    });
+    const data = await res.json();
+    const user = data;
+    return user;
+  } catch (e) {
+    console.log(e);
+  }
+};

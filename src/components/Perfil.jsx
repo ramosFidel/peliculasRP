@@ -1,25 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { updateUserAuth } from "../service.js";
-import { Button, Input } from "@material-tailwind/react";
-
+import React, { useState } from "react";
+import {
+  updateUserAuth,
+  deleteUserAuth,
+  updateUserPassAuth,
+} from "../service.js";
+import { Button, Input, Alert } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 function EditarPerfil({ currentUser, setCurrentUser }) {
   const [formData, setFormData] = useState({
     username: "",
-    email: "",
+    correo: "",
+  });
+  const [alert, setAlert] = useState({
+    color: "",
+    message: "",
+    active: false,
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  const handleActualiza = (e) => {
+  const handleActualiza = async (e) => {
     e.preventDefault();
     let idCurrentUser = currentUser.id;
-    // console.log(currentUser.id);
 
     //Funcion que actualiza el user
-    const updateUser = updateUserAuth(formData, idCurrentUser);
+    const data = await updateUserAuth(formData, idCurrentUser);
+    if (data.success) {
+      setAlert({ color: "green", message: data.message, active: true });
+      setCurrentUser({ ...currentUser, ...formData });
+    } else {
+      setAlert({ color: "red", message: data.message, active: true });
+    }
 
-    setCurrentUser({ ...currentUser, ...formData });
     // console.log(formData);
   };
   return (
@@ -42,14 +55,14 @@ function EditarPerfil({ currentUser, setCurrentUser }) {
         <div className="mb-4">
           <label>Email Address</label>
           <Input
-            name="email"
+            name="correo"
             type="email"
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-            placeholder={currentUser && currentUser.email}
+            placeholder={currentUser && currentUser.correo}
             labelProps={{
               className: "hidden",
             }}
-            value={formData.email}
+            value={formData.correo}
             onChange={handleChange}
           />
         </div>
@@ -64,29 +77,52 @@ function EditarPerfil({ currentUser, setCurrentUser }) {
             Guardar Cambios
           </Button>
         </div>
+        <Alert color={alert.color} open={alert.active}>
+          {alert.message}
+        </Alert>
       </form>
     </div>
   );
 }
 function CambioContrasena({ currentUser, setCurrentUser }) {
+  const [oldPass, setOldPass] = useState("");
   const [formData, setFormData] = useState({
     contra: "",
     contraConf: "",
   });
   const [contra, setContra] = useState(true);
-  const [contraConf, setContraconf] = useState(true);
-
+  // const [contraConf, setContraconf] = useState(true);
+  const [alert, setAlert] = useState({
+    color: "",
+    message: "",
+    active: false,
+  });
   const handleContra = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    if (formData.contra === formData.contraConf) {
-      setContraconf(true);
-    } else {
-      setContraconf(false);
-    }
+    // console.log(formData);
+    // if (formData.contra === formData.contraConf) {
+    //   setContraconf(false);
+    // } else {
+    //   setContraconf(true);
+    // }
   };
   //Falta funcionalidad
-  const GuardaContra = () => {};
+  const GuardaContra = async () => {
+    const data = await updateUserPassAuth(formData.contra, currentUser.id);
+    if (data.success) {
+      setAlert({ color: "green", message: data.message, active: true });
+      setCurrentUser({ ...currentUser, password: formData.contra });
+      setFormData({
+        contra: "",
+        contraConf: "",
+      });
+      setOldPass("");
+    } else {
+      setAlert({ color: "red", message: data.message, active: true });
+    }
+  };
   const oldContra = (e) => {
+    setOldPass(e.target.value);
     if (currentUser.password === e.target.value) {
       setContra(false);
     } else {
@@ -109,6 +145,7 @@ function CambioContrasena({ currentUser, setCurrentUser }) {
             labelProps={{
               className: "hidden",
             }}
+            value={oldPass}
             onChange={oldContra}
           />
         </div>
@@ -148,10 +185,13 @@ function CambioContrasena({ currentUser, setCurrentUser }) {
           size="sm"
           className=""
           onClick={GuardaContra}
-          disabled={contra || contraConf}
+          disabled={contra}
         >
           Cambiar contraseña
         </Button>
+        <Alert color={alert.color} open={alert.active}>
+          {alert.message}
+        </Alert>
       </form>
     </div>
   );
@@ -161,11 +201,25 @@ function Nocuenta() {
 }
 export const Perfil = ({ currentUser, setCurrentUser }) => {
   const [componenteActivo, setComponenteActivo] = useState("EditarPerfil");
+  const navigate = useNavigate();
   const editarClick = () => {
     setComponenteActivo("EditarPerfil");
   };
   const cambiarClick = () => {
     setComponenteActivo("CambiarContrasena");
+  };
+  const eliminarCuenta = async () => {
+    const data = await deleteUserAuth(currentUser.id);
+    if (data.success) {
+      setCurrentUser(null);
+      navigate("/login");
+    } else {
+      console.log(data.message);
+    }
+  };
+  const cerrarSesion = () => {
+    setCurrentUser(null);
+    navigate("/login");
   };
   console.log(currentUser);
   return (
@@ -186,7 +240,7 @@ export const Perfil = ({ currentUser, setCurrentUser }) => {
                       {currentUser && currentUser.username}
                     </h1>
                     <p className="text-gray-600">
-                      {currentUser && currentUser.email}
+                      {currentUser && currentUser.correo}
                     </p>
                   </div>
                   <hr className="my-6 border-t border-gray-300" />
@@ -209,6 +263,7 @@ export const Perfil = ({ currentUser, setCurrentUser }) => {
                         variant="text"
                         size="sm"
                         className="mb-2"
+                        onClick={eliminarCuenta}
                       >
                         Eliminar cuenta
                       </Button>
@@ -217,6 +272,7 @@ export const Perfil = ({ currentUser, setCurrentUser }) => {
                         variant="gradient"
                         size="sm"
                         className=""
+                        onClick={cerrarSesion}
                       >
                         Cerrar sesión
                       </Button>

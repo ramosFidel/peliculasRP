@@ -6,7 +6,7 @@ import { Button, Input, Typography } from "@material-tailwind/react";
 function Registro() {
   const [formData, setFormData] = useState({
     username: "",
-    email: "",
+    correo: "",
     password: "",
   });
 
@@ -17,11 +17,13 @@ function Registro() {
 
   const navigate = useNavigate();
 
-  const redireccionLogin = (e) => {
+  const redireccionLogin = async (e) => {
     e.preventDefault();
-    registroAuth(formData);
+    const register = await registroAuth(formData);
+    if (register.success) {
+      navigate("/login");
+    }
     // console.log(formData);
-    navigate("/login");
   };
   return (
     <div className="bg-gray-100 dark:bg-gray-800 h-screen overflow-hidden flex items-center justify-center">
@@ -43,8 +45,8 @@ function Registro() {
           <div className="mb-4">
             <Input
               label="Correo electrónico"
-              name="email"
-              value={formData.email}
+              name="correo"
+              value={formData.correo}
               onChange={handleChange}
             />
           </div>

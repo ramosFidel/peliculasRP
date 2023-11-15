@@ -18,14 +18,14 @@ function Login({ onLogin }) {
   };
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    const usuarioEncontrado = loginAuth(formData);
+  const handleLogin = async () => {
+    const data = await loginAuth(formData);
 
-    if (usuarioEncontrado) {
-      onLogin(usuarioEncontrado);
+    if (data.success) {
+      onLogin(data.data[0]);
       navigate("/");
     } else {
-      setError("Credenciales incorrectas");
+      setError(data.message);
     }
   };
 
