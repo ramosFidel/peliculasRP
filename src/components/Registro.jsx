@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registroAuth } from "../service";
-import { Button, Input, Typography } from "@material-tailwind/react";
+import { Button, Input } from "@material-tailwind/react";
 
 function Registro() {
   const [formData, setFormData] = useState({
@@ -19,11 +19,14 @@ function Registro() {
 
   const redireccionLogin = async (e) => {
     e.preventDefault();
-    const register = await registroAuth(formData);
-    if (register.success) {
-      navigate("/login");
+    try {
+      const register = await registroAuth(formData);
+      if (register.success) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
     }
-    // console.log(formData);
   };
   return (
     <div className="bg-gray-100 dark:bg-gray-800 h-screen overflow-hidden flex items-center justify-center">

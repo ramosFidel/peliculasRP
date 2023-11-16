@@ -14,18 +14,21 @@ function Login({ onLogin }) {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setError("");
-    // console.log(formData);
   };
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const data = await loginAuth(formData);
+    try {
+      const data = await loginAuth(formData);
 
-    if (data.success) {
-      onLogin(data.data[0]);
-      navigate("/");
-    } else {
-      setError(data.message);
+      if (data.success) {
+        onLogin(data.data[0]);
+        navigate("/");
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

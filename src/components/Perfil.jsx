@@ -23,17 +23,18 @@ function EditarPerfil({ currentUser, setCurrentUser }) {
   const handleActualiza = async (e) => {
     e.preventDefault();
     let idCurrentUser = currentUser.id;
-
-    //Funcion que actualiza el user
-    const data = await updateUserAuth(formData, idCurrentUser);
-    if (data.success) {
-      setAlert({ color: "green", message: data.message, active: true });
-      setCurrentUser({ ...currentUser, ...formData });
-    } else {
-      setAlert({ color: "red", message: data.message, active: true });
+    try {
+      const data = await updateUserAuth(formData, idCurrentUser);
+      if (data.success) {
+        setAlert({ color: "green", message: data.message, active: true });
+        setCurrentUser({ ...currentUser, ...formData });
+      } else {
+        setAlert({ color: "red", message: data.message, active: true });
+      }
+    } catch (error) {
+      console.log(error);
     }
-
-    // console.log(formData);
+    //Funcion que actualiza el user
   };
   return (
     <div className="bg-white shadow rounded-lg p-6">
@@ -91,7 +92,6 @@ function CambioContrasena({ currentUser, setCurrentUser }) {
     contraConf: "",
   });
   const [contra, setContra] = useState(true);
-  // const [contraConf, setContraconf] = useState(true);
   const [alert, setAlert] = useState({
     color: "",
     message: "",
@@ -99,26 +99,24 @@ function CambioContrasena({ currentUser, setCurrentUser }) {
   });
   const handleContra = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    // console.log(formData);
-    // if (formData.contra === formData.contraConf) {
-    //   setContraconf(false);
-    // } else {
-    //   setContraconf(true);
-    // }
   };
   //Falta funcionalidad
   const GuardaContra = async () => {
-    const data = await updateUserPassAuth(formData.contra, currentUser.id);
-    if (data.success) {
-      setAlert({ color: "green", message: data.message, active: true });
-      setCurrentUser({ ...currentUser, password: formData.contra });
-      setFormData({
-        contra: "",
-        contraConf: "",
-      });
-      setOldPass("");
-    } else {
-      setAlert({ color: "red", message: data.message, active: true });
+    try {
+      const data = await updateUserPassAuth(formData.contra, currentUser.id);
+      if (data.success) {
+        setAlert({ color: "green", message: data.message, active: true });
+        setCurrentUser({ ...currentUser, password: formData.contra });
+        setFormData({
+          contra: "",
+          contraConf: "",
+        });
+        setOldPass("");
+      } else {
+        setAlert({ color: "red", message: data.message, active: true });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
   const oldContra = (e) => {
@@ -209,22 +207,25 @@ export const Perfil = ({ currentUser, setCurrentUser }) => {
     setComponenteActivo("CambiarContrasena");
   };
   const eliminarCuenta = async () => {
-    const data = await deleteUserAuth(currentUser.id);
-    if (data.success) {
-      setCurrentUser(null);
-      navigate("/login");
-    } else {
-      console.log(data.message);
+    try {
+      const data = await deleteUserAuth(currentUser.id);
+      if (data.success) {
+        setCurrentUser(null);
+        navigate("/login");
+      } else {
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
   const cerrarSesion = () => {
     setCurrentUser(null);
     navigate("/login");
   };
-  console.log(currentUser);
   return (
     <>
-      {true ? (
+      {currentUser ? (
         <div className="bg-gray-100 min-h-screen flex items-center justify-center">
           <div className="container mx-auto py-8">
             <div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
