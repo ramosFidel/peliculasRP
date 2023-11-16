@@ -7,7 +7,7 @@ export function useMovies({ search, sort, setIsSearching }) {
   const [error, setError] = useState(null);
   const previusSearch = useRef(search);
 
-  const getMovies = useCallback((search) => {
+  const getMovies = useCallback(async (search) => {
     if (search === previusSearch.current) {
       return;
     }
@@ -17,7 +17,7 @@ export function useMovies({ search, sort, setIsSearching }) {
       setError(null);
       setIsSearching(true);
       previusSearch.current = search;
-      const newmovies = searchMovies({ search });
+      const newmovies = await searchMovies({ search });
       setMovies(newmovies);
     } catch (e) {
       setError(e.message);

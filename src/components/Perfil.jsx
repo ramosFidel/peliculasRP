@@ -234,7 +234,7 @@ export const Perfil = ({ currentUser, setCurrentUser }) => {
                   <div className="flex flex-col items-center">
                     <img
                       alt="avatar"
-                      src="https://randomuser.me/api/portraits/men/94.jpg"
+                      src="https://cdn.icon-icons.com/icons2/1674/PNG/512/person_110935.png"
                       className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0"
                     ></img>
                     <h1 className="text-xl font-bold">

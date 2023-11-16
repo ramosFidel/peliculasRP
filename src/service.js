@@ -1,11 +1,26 @@
 import Data from "./mocks/with-results.json";
-export const searchMovies = ({ search }) => {
+export const searchMovies = async ({ search }) => {
   try {
-    const res = Data.Search;
-    // const data = res.filter((el) => search === el.Year);
+    const res = await fetch("http://localhost:3001/catalogo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        PalabraClave: search,
+      }),
+    });
+    const data = await res.json();
+    const movie = data.data[0];
     console.log(search);
-    console.log(res);
-    return res;
+
+    console.log(movie);
+    return movie;
+    // const res = Data.Search;
+    // // const data = res.filter((el) => search === el.Year);
+    // console.log(search);
+    // console.log(res);
+    // return res;
   } catch {
     throw new Error("Error searching movies");
   }

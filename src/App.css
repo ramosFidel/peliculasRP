@@ -20,7 +20,11 @@
 }
 
 .movie {
+  flex-direction: column;
+  display: flex;
   text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 .movie img {
   border-radius: 8px;

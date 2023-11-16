@@ -24,12 +24,15 @@ export function StickyNavbar({
 
   const handleLogout = () => {
     onLogout(null);
+    setIsSearching(false);
     navigate("/login");
   };
   const handleLogin = () => {
+    setIsSearching(false);
     navigate("/login");
   };
   const handleSingin = () => {
+    setIsSearching(false);
     navigate("registro");
   };
   const handleMainPeliculas = () => {

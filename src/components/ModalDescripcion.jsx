@@ -9,7 +9,7 @@ import {
 } from "@material-tailwind/react";
 
 export const ModalDescripcion = ({ open, handleOpen, selectedMovie }) => {
-  const { Title, Year, Description, Type } = selectedMovie;
+  const { Title, Year, Description, Genre, Director } = selectedMovie;
   return (
     <>
       <Dialog open={open} handler={handleOpen}>
@@ -19,8 +19,11 @@ export const ModalDescripcion = ({ open, handleOpen, selectedMovie }) => {
           </Typography>
         </DialogHeader>
         <DialogBody divider className="grid place-items-start gap-4">
-          <Typography variant="h8" className="text-sm">
-            Año de lanzamiento: {Year}, Genero: {Type}
+          <Typography variant="small" className="text-sm">
+            Año de lanzamiento: {Year}, Genero: {Genre}
+          </Typography>
+          <Typography variant="small" className="text-sm">
+            Director: {Director}
           </Typography>
           <Typography className="text-center font-normal">
             {Description}
