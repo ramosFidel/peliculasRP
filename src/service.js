@@ -65,9 +65,22 @@ export const registroAuth = async (formData) => {
 };
 
 // Peliculas recomendadas de la pantalla principal
-export const mainMovies = () => {
-  const movies = Data.Search.slice(1, 5);
-  return movies;
+export const mainMovies = async () => {
+  try {
+    const res = await fetch("http://localhost:3001/recomendados", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    const peli = data;
+    return peli;
+  } catch (e) {
+    console.log(e);
+  }
+  // const movies = Data.Search.slice(1, 5);
+  // return movies;
 };
 
 export const updateUserAuth = async (formData, idCurrentUser) => {
@@ -123,6 +136,22 @@ export const deleteUserAuth = async (idUser) => {
     const data = await res.json();
     const user = data;
     return user;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const carouselPeli = async () => {
+  try {
+    const res = await fetch("http://localhost:3001/carousel", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    const peli = data;
+    return peli;
   } catch (e) {
     console.log(e);
   }
