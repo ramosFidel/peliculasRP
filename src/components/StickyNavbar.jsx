@@ -63,6 +63,20 @@ export function StickyNavbar({
           Peliculas
         </Link>
       </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <Link
+          to="/aboutus"
+          className="flex items-center"
+          onClick={() => setIsInCuenta(false)}
+        >
+          About Us
+        </Link>
+      </Typography>
       {currentUser && (
         <Typography
           as="li"

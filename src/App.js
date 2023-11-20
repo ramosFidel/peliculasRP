@@ -6,6 +6,7 @@ import Login from "./components/Login.jsx";
 import Registro from "./components/Registro.jsx";
 import { Perfil } from "./components/Perfil.jsx";
 import { StickyNavbar } from "./components/StickyNavbar.jsx";
+import { AboutUs } from "./components/AboutUs.jsx";
 import { useSearch } from "./hooks/useSearch.js";
 import { useMovies } from "./hooks/useMovies";
 function App() {
@@ -61,6 +62,8 @@ function App() {
           element={<Login onLogin={handleLogin} currentUser={currentUser} />}
         />
         <Route path="/registro" element={<Registro />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+
         <Route
           path="/perfil"
           element={
