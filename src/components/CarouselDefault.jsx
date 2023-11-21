@@ -20,11 +20,7 @@ export function CarouselDefault() {
       {peli && (
         <Carousel className="rounded-xl" autoplay={true} loop={true}>
           {peli.map((el) => (
-            <img
-              src={el.Poster}
-              alt="a"
-              className="h-52 w-full object-cover"
-            ></img>
+            <img src={el.Poster} alt="a" className=" w-full object-cover"></img>
           ))}
         </Carousel>
       )}
