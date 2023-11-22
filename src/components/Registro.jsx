@@ -9,7 +9,7 @@ function Registro() {
     correo: "",
     password: "",
   });
-
+  const [error, setError] = useState("");
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -23,6 +23,8 @@ function Registro() {
       const register = await registroAuth(formData);
       if (register.success) {
         navigate("/login");
+      } else {
+        setError(register.message);
       }
     } catch (error) {
       console.log(error);
@@ -43,6 +45,7 @@ function Registro() {
               name="username"
               value={formData.username}
               onChange={handleChange}
+              error={error}
             />
           </div>
           <div className="mb-4">
@@ -51,6 +54,7 @@ function Registro() {
               name="correo"
               value={formData.correo}
               onChange={handleChange}
+              error={error}
             />
           </div>
           <div className="mb-4">
@@ -60,6 +64,7 @@ function Registro() {
               name="password"
               value={formData.password}
               onChange={handleChange}
+              error={error}
             />
           </div>
           <div className="mb-4">
@@ -72,6 +77,7 @@ function Registro() {
             >
               Registrarse
             </Button>
+            {error && <p className="text-red-500 mt-2">{error}</p>}
           </div>
           <div className="flex justify-start text-sm font-light">
             ¿Ya tienes una cuenta?
