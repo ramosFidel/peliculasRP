@@ -80,13 +80,15 @@ function Registro() {
             {error && <p className="text-red-500 mt-2">{error}</p>}
           </div>
           <div className="flex justify-start text-sm font-light">
-            ¿Ya tienes una cuenta?
-            <Link
-              to="/login"
-              className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500 underline"
-            >
-              Login aquí
-            </Link>
+            <p className="text-gray-500">
+              ¿Ya tienes una cuenta?,{" "}
+              <Link
+                to="/login"
+                className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500 underline"
+              >
+                Login aquí
+              </Link>
+            </p>
           </div>
         </form>
       </div>

@@ -68,18 +68,20 @@ function Login({ onLogin }) {
               className=""
               onClick={handleLogin}
             >
-              Registrarse
+              Login
             </Button>
             {error && <p className="text-red-500 mt-2">{error}</p>}
           </div>
           <div className="mb-4 text-sm font-light">
-            ¿No tienes cuenta aún?,
-            <Link
-              to="/registro"
-              className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500 underline"
-            >
-              Regístrate
-            </Link>
+            <p className="text-gray-500">
+              ¿No tienes cuenta aún?,{" "}
+              <Link
+                to="/registro"
+                className="font-normal transition-colors  hover:text-blue-500 focus:text-blue-500 underline"
+              >
+                Regístrate aquí
+              </Link>
+            </p>
           </div>
         </form>
       </div>
