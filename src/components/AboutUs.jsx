@@ -35,7 +35,7 @@ export const AboutUs = () => {
                 className="w-12 h-12 rounded-full md:hidden"
                 src="https://randomuser.me/api/portraits/men/68.jpg"
               ></img>
-              <span className="font-bold text-lg">Grupo #</span>
+              <span className="font-bold text-lg">Grupo #3</span>
             </footer>
           </div>
         </article>

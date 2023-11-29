@@ -72,7 +72,7 @@ export function StickyNavbar({
         <Link
           to="/aboutus"
           className="flex items-center"
-          onClick={() => setIsInCuenta(false)}
+          onClick={() => setIsInCuenta(true)}
         >
           About Us
         </Link>
